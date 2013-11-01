@@ -24,8 +24,7 @@ int main(int argc, char **argv) {
       milliseconds total; 
       //The nice thing is that you can do implicit conversions. 
       total = total + h + m + ms; 
-      timer(total); 
-      return 0; 
+      return timer(total);
 
     } else /*if (argv[i] == std::string("-h"))*/ {
       std::cout << "Usage:" << std::endl;
