@@ -4,12 +4,18 @@
 #include <thread>
 using namespace std::chrono;
 
-int stopwatch();
 int timer(seconds); 
+int stopwatch();
+int showclock(bool repeat=false);
+
 int main(int argc, char **argv) {
   //parse options
   for(int i=1; i<argc; i++) {
-    if (argv[i] ==( std::string("-t"))){
+    if (argv[i] == (std::string("-c"))) {
+      if (argc > 2)
+        return showclock(true);
+      return showclock();
+    } else if (argv[i] ==( std::string("-t"))){
       if (i+1 >= argc)
         return 1;
       std::string in(argv[i+1]);
@@ -48,6 +54,7 @@ int main(int argc, char **argv) {
     } else /*if (argv[i] == std::string("-h"))*/ {
       std::cout << "Usage:" << std::endl;
       std::cout << argv[0] << "           - act as a stopwatch, stoping when input is recieved" << std::endl;
+      std::cout << argv[0] << " -c <loop> - displays the current date and time, optionally in a loop" << std::endl ;
       std::cout << argv[0] << " -t [[[[[years:]weeks:]days:]hours:]minutes:]<seconds> - wait for specified duration, then exit" << std::endl;
       return 0;
     }
@@ -63,7 +70,6 @@ int stopwatch() {
   return 0;
 }
 
-  
 int timer(seconds count) {
   auto t1 = high_resolution_clock::now();
   auto t2 = t1+count;
@@ -72,4 +78,17 @@ int timer(seconds count) {
   }
   std::cout << "Finished" << std::endl;
   return 0;
+}
+
+int showclock(bool repeat) {
+  auto t1 = system_clock::to_time_t(system_clock::now());
+  if (!repeat) {
+    std::cout << ctime(&t1);
+    return 0;
+  }
+  while(true) {
+    t1 = system_clock::to_time_t(system_clock::now());
+    std::cout << ctime(&t1);
+    std::this_thread::sleep_for(seconds(1));
+  }
 }
