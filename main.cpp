@@ -129,7 +129,9 @@ std::string humanreadabletime(double seconds){
   }
   else if(!maxConvert){
     time.std::string::insert(0, std::to_string(var) + "Days, "); 
-  } 
-  time.std::string::append(std::to_string(seconds-sec));
+  }
+  std::string raw_ms = std::to_string(seconds-sec);
+  raw_ms.std::string::erase(0,1);
+  time.std::string::append(raw_ms);
   return time;    
 }
