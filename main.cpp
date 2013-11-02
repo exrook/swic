@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
       std::string in(argv[i+1]);
       int colonc = 0;
       short colonp[in.length()];
-      for(int j=0; j < in.length(); j++) {
+      for(unsigned int j=0; j < in.length(); j++) {
         if (in[j] == ':') 
           colonp[colonc++] = j;
       }

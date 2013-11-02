@@ -1,3 +1,3 @@
 *.o
 swic
-*.swp 
+.main.cpp.swp 
