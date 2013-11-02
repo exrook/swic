@@ -14,8 +14,6 @@ int main(int argc, char **argv) {
        //Create the entire input to a string 
       std::string input = std::string(argv[i+1]); 
       //create a variable to keep track of stuff
-<<<<<<< HEAD
-=======
       hours h ( std::stoi(std::string(argv[i+1]).substr(0,2), nullptr, 10));
       minutes m( std::stoi(std::string(argv[i+1]).substr(4,5), nullptr, 10)); 
       seconds s( std::stoi(std::string(argv[i+1]).substr(7,8), nullptr, 10)); 
@@ -25,7 +23,6 @@ int main(int argc, char **argv) {
       //The nice thing is that you can do implicit conversions. 
       total = total + h + m + ms; 
       return timer(total);
->>>>>>> 2aa7744a2fe86c510bdb7a8cf892e32dadddbab0
 
     } else /*if (argv[i] == std::string("-h"))*/ {
       std::cout << "Usage:" << std::endl;
