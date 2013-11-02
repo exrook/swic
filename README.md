@@ -21,7 +21,7 @@ Description:
 Exit Status:
 	0 if OK
 	1 if error occured during parsing -t
-
+	2 if value of input is wayy too high. 
 AUTHOR
 	Written by Raj Shrimali and Jacob Hughes
 
