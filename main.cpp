@@ -7,6 +7,7 @@ using namespace std::chrono;
 int timer(seconds); 
 int stopwatch();
 int showclock(bool repeat=false);
+std::string humanreadabletime(double); 
 
 int main(int argc, char **argv) {
   //parse options
@@ -66,7 +67,7 @@ int stopwatch() {
   auto t1 = high_resolution_clock::now();
   std::cin.ignore();
   auto t2 = high_resolution_clock::now();
-  std::cout <<  (duration_cast<duration<double>>(t2-t1)).count() << std::endl;
+  std::cout << humanreadabletime((duration_cast<duration<double>>(t2-t1)).count())<< std::endl;
   return 0;
 }
 
@@ -92,3 +93,46 @@ int showclock(bool repeat) {
     std::this_thread::sleep_for(seconds(1));
   }
 }
+std::string humanreadabletime(double seconds){
+  //First, get the integer part. The decimal in this is ms. 
+  const int sec = (int) seconds; 
+  //now, create a timearray to hold the possible values.
+  // We have years, days, hours, minutes, and seconds.
+  // Doing weeks can cause loss of precision.  
+  //Find if conversion is needed, and if so, how many steps: 
+  std::string time = "";
+  if( sec > 60 ) {
+    //same algorighm for sec --> min, min --> hour 
+    int var = sec; 
+    for( int i = 0; i < 2; i ++){
+      //insert var%60 value into the string 
+      time.std::string::insert(0, ":"+ std::to_string(var%60) );
+      //make var the normal value again  
+      var = (var - (var %60)) / 60; 
+    }
+    //now for days 
+    if(var > 24){
+      time.std::string::insert(0, std::to_string(var%24)); 
+      var = (var - (var % 24) ) / 24; 
+    }
+    else{
+      time.std::string::insert(0,std:: to_string(var));
+    }
+    // Its weird putting days in the : format, so they get to be special. 
+    if( var > 365 ){ 
+      time.std::string::insert(0, std::to_string(var%365) + " Days, " );
+      var = (var - (var % 365) ) / 365; 
+      time.std::string::insert(0,std::to_string(var) + " Years, ");  
+    }
+    else{
+      time.std::string::insert(0,std::to_string(var) + "Days, "); 
+    } 
+  }
+  //If its less than 60 seconds, 
+  else{
+    return std::to_string(seconds);
+  } 
+  time.std::string::append(std::to_string(seconds-sec));
+  return time;    
+}
+  
