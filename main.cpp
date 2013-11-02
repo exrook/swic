@@ -2,6 +2,7 @@
 #include <string>
 #include <chrono>
 #include <thread>
+#include <exception>
 using namespace std::chrono;
 
 int timer(seconds); 
@@ -26,10 +27,23 @@ int main(int argc, char **argv) {
           colonp[colonc++] = j;
       }
       int times[colonc];
-      times[0] = std::stoi(in.substr(0,colonp[0]));
-      for(int j=0; j < colonc; j++) {
-        times[j+1] = std::stoi(in.substr(colonp[j]+1, colonp[j+1]-colonp[j]-1));
-      }
+			try{
+				times[0] = std::stoi(in.substr(0,colonp[0]));
+      } catch (std::exception e){
+				std::cout << "Error occured while parsing arguemnt for -t" << std::endl; 
+				std::cout << "Are you sure you input a correct time value? " << std::endl;
+				return 1; 
+			}  
+			for(int j=0; j < colonc; j++) {
+				try{
+        	times[j+1] = std::stoi(in.substr(colonp[j]+1, colonp[j+1]-colonp[j]-1));
+      	} 
+				catch(std::exception e){
+				std::cout << "Error occured while parsing arguemnt for -t" << std::endl; 
+				std::cout << "Are you sure you input a correct time value? " << std::endl;
+				return 1; 
+				}
+			}
       int sum = times[colonc];
       for(int j=colonc-1; j >= 0; j--) {
         switch (colonc-j) {
