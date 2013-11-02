@@ -8,7 +8,6 @@ int timer(seconds);
 int stopwatch();
 int showclock(bool repeat=false);
 std::string humanreadabletime(double); 
-
 int main(int argc, char **argv) {
   //parse options
   for(int i=1; i<argc; i++) {
@@ -94,45 +93,43 @@ int showclock(bool repeat) {
   }
 }
 std::string humanreadabletime(double seconds){
-  //First, get the integer part. The decimal in this is ms. 
-  const int sec = (int) seconds; 
-  //now, create a timearray to hold the possible values.
-  // We have years, days, hours, minutes, and seconds.
-  // Doing weeks can cause loss of precision.  
-  //Find if conversion is needed, and if so, how many steps: 
+  if ( seconds < 60 ) return std::to_string(seconds); 
+  const int sec = (int) seconds;   
   std::string time = "";
-  if( sec > 60 ) {
-    //same algorighm for sec --> min, min --> hour 
-    int var = sec; 
-    for( int i = 0; i < 2; i ++){
-      //insert var%60 value into the string 
-      time.std::string::insert(0, ":"+ std::to_string(var%60) );
-      //make var the normal value again  
-      var = (var - (var %60)) / 60; 
-    }
-    //now for days 
-    if(var > 24){
-      time.std::string::insert(0, std::to_string(var%24)); 
-      var = (var - (var % 24) ) / 24; 
-    }
-    else{
-      time.std::string::insert(0,std:: to_string(var));
-    }
-    // Its weird putting days in the : format, so they get to be special. 
-    if( var > 365 ){ 
-      time.std::string::insert(0, std::to_string(var%365) + " Days, " );
-      var = (var - (var % 365) ) / 365; 
-      time.std::string::insert(0,std::to_string(var) + " Years, ");  
-    }
-    else{
-      time.std::string::insert(0,std::to_string(var) + "Days, "); 
-    } 
+  //same algorighm for sec --> min, min --> hour 
+  int var = sec; 
+  char maxConvert= 0;  
+  //insert var%60 value into the string 
+  time.std::string::insert(0, std::to_string(var%60) ); //Seconds 
+  //make var the normal value again  
+  var = (var - (var %60)) / 60; // seconds --> minutes  
+  if ( var > 60){
+    time.std::string::insert(0, std::to_string(var%60) + ":"); //minutes  
+    var = (var - (var%60) ) / 60 ; // minutes --> hours 
   }
-  //If its less than 60 seconds, 
-  else{
-    return std::to_string(seconds);
+  else if(!maxConvert){ 
+    time.std::string::insert(0, std::to_string(var) + ":"); // minutes  
+    var = 0;  
+    maxConvert=1; 
+  }   
+  //now for days 
+  if(var > 24){
+    time.std::string::insert(0, std::to_string(var%24) + ":" ); 
+    var = (var - (var % 24) ) / 24; 
+  }
+  else if(!maxConvert){
+    time.std::string::insert(0,std:: to_string(var) + ":" );
+    maxConvert=1; 
+  }
+  // Its weird putting days in the : format, so they get to be special. 
+  if( var > 365 ){ 
+    time.std::string::insert(0, std::to_string(var%365) + " Days, " );
+    var = (var - (var % 365) ) / 365; 
+    time.std::string::insert(0,std::to_string(var) + " Years, ");  
+  }
+  else if(!maxConvert){
+    time.std::string::insert(0, std::to_string(var) + "Days, "); 
   } 
   time.std::string::append(std::to_string(seconds-sec));
   return time;    
 }
-  
