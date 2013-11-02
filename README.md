@@ -16,7 +16,7 @@ Description:
 
 Exit Status: 
 	0 if OK 
-
+	1 if error occured during parsing -t 
 AUTHOR
 	Written by Raj Shrimali and Jacob Hughes 
 
