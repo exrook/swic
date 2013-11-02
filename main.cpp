@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <thread>
 using namespace std::chrono;
 
 int stopwatch();
@@ -47,9 +48,10 @@ int main(int argc, char **argv) {
     } else /*if (argv[i] == std::string("-h"))*/ {
       std::cout << "Usage:" << std::endl;
       std::cout << argv[0] << "           - act as a stopwatch, stoping when input is recieved" << std::endl;
-      std::cout << argv[0] << " -t <time> - wait until time, then exit" << std::endl;
-      std::cout << argv[0] << " <time> should be in format HHH:MM:SS:MS. Include 0's even if you aren't using it, so 1 second will be: 000:00:01:00" << std::endl;  }
+      std::cout << argv[0] << " -t [[[[[years:]weeks:]days:]hours:]minutes:]<seconds> - wait for specified duration, then exit" << std::endl;
+      return 0;
     }
+  }
   return stopwatch();
 }
 
@@ -63,15 +65,11 @@ int stopwatch() {
 
   
 int timer(seconds count) {
-  //Get the start loop
-  auto endT = high_resolution_clock::now() + count;
-  //std::cout <<  count.count() << std::endl
-  //<< (<duration_cast<seconds>>endT).count() << std::endl;
-  while( high_resolution_clock::now() != endT ){
-    auto t = high_resolution_clock::now() - endT ;
-    if( t < std::chrono::milliseconds(5) || t >-( std::chrono::milliseconds(5))) {
-      std::cout << "Timer Complete" << std::endl; 
-      return 0;
-    }
+  auto t1 = high_resolution_clock::now();
+  auto t2 = t1+count;
+  while ( t2 > high_resolution_clock::now()) {
+    std::this_thread::sleep_for(milliseconds(100));
   }
+  std::cout << "Finished" << std::endl;
+  return 0;
 }
