@@ -27,9 +27,10 @@ int main(int argc, char **argv) {
           colonp[colonc++] = j;
       }
       int times[colonc];
-			try{
+    	try{
 				times[0] = std::stoi(in.substr(0,colonp[0]));
-      } catch (std::exception e){
+      } 
+      catch (std::exception e){
 				std::cout << "Error occured while parsing arguemnt for -t" << std::endl; 
 				std::cout << "Are you sure you input a correct time value? " << std::endl;
 				return 1; 
@@ -41,10 +42,10 @@ int main(int argc, char **argv) {
 				catch(std::exception e){
 				std::cout << "Error occured while parsing arguemnt for -t" << std::endl; 
 				std::cout << "Are you sure you input a correct time value? " << std::endl;
-				return 1; 
+			return 1; 
 				}
 			}
-      int sum = times[colonc];
+      unsigned long sum = times[colonc];
       for(int j=colonc-1; j >= 0; j--) {
         switch (colonc-j) {
           case 1: //minutes
@@ -64,6 +65,7 @@ int main(int argc, char **argv) {
             break;
         }
       }
+      if(sum > 343597438368) return 2; 
       return timer(seconds(sum));
     } else /*if (argv[i] == std::string("-h"))*/ {
       std::cout << "Usage:" << std::endl;
