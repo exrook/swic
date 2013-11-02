@@ -10,22 +10,10 @@ int main(int argc, char **argv) {
   for(int i=1; i<argc; i++) {
     if (argv[i] ==( std::string("-t"))){
       //parse their time input. They should have strings. 
-      //first check and make sure its a valid string!!! 
-      if(std::string(argv[i+1]).std::string::length()%2  != 0){
-        std::cout << "Improper time given. Try again" << std::endl; 
-        return 1; 
-      } 
+      //I'm not going to attempt to verify input. 
+       //Create the entire input to a string 
+      std::string input = std::string(argv[i+1]); 
       //create a variable to keep track of stuff
-      hours h ( std::stoi(std::string(argv[i+1]).substr(0,2), nullptr, 10));
-      minutes m( std::stoi(std::string(argv[i+1]).substr(4,5), nullptr, 10)); 
-      seconds s( std::stoi(std::string(argv[i+1]).substr(7,8), nullptr, 10)); 
-      milliseconds ms(std::stoi(std::string(argv[i+1]).substr(10,11), nullptr,10));
-      //The max a millisecond can hold is 45 bits, which is a lot more than we need. 
-      milliseconds total; 
-      //The nice thing is that you can do implicit conversions. 
-      total = total + h + m + ms; 
-      timer(total); 
-      return 0; 
 
     } else /*if (argv[i] == std::string("-h"))*/ {
       std::cout << "Usage:" << std::endl;
@@ -46,5 +34,14 @@ int stopwatch() {
 
   
 int timer(milliseconds count) {
-  return 0;
+  //Get the start loop
+  auto endT = high_resolution_clock::now() + count;
+  //std::cout << duration_cast<duration<double>>count << std::endl;
+  while( high_resolution_clock::now() != endT ){
+    auto t = high_resolution_clock::now() - endT ;
+    if( t < std::chrono::milliseconds(5) || t >-( std::chrono::milliseconds(5))){ 
+      std::cout << "Timer Complete" << std::endl; 
+    return 0;
+    }
+  }
 }
