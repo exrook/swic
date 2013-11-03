@@ -6,7 +6,7 @@ Synopsis:
         swic [OPTION]
 
 Description:
-	By default, swic acts as a stopwatch, and returns the time elapsed on any key input.
+	By default, swic acts as a stopwatch.
         
         [OPTIONS] are:
         

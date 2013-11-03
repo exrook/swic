@@ -20,9 +20,6 @@ int main(int argc, char **argv) {
       if (i+1 >= argc)
         return 1;
       std::string in(argv[i+1]);
-      if(in == "\0"){
-        std::cout << "DIdn't put in an argument. Jokes on You!" << std::endl;        return 2; 
-      }
       int colonc = 0;
       short colonp[in.length()];
       for(unsigned int j=0; j < in.length(); j++) {
@@ -90,9 +87,14 @@ int main(int argc, char **argv) {
 
 int stopwatch() {
   auto t1 = high_resolution_clock::now();
-  std::cin.ignore();
+  std::cout << "Time. Use Control-C (Command-C Mac Users) to exit. " <<std::endl;
+
+  while(1 ){
   auto t2 = high_resolution_clock::now();
-  std::cout << humanreadabletime((duration_cast<duration<double>>(t2-t1)).count())<< std::endl;
+  std::cout << humanreadabletime((duration_cast<duration<double>>(t2-t1)).count())<< std::endl<<"\033[A\033[K";
+  std::this_thread::sleep_for(milliseconds(100));
+  }
+
   return 0;
 }
 
@@ -100,6 +102,7 @@ int timer(seconds count) {
   auto t1 = high_resolution_clock::now();
   auto t2 = t1+count;
   while ( t2 > high_resolution_clock::now()) {
+    std::cout << "Seconds Left:" <<std::endl<<duration_cast<duration<double>>(count-(high_resolution_clock::now()-t1)).count() << std::endl << "\033[2A\033[K";
     std::this_thread::sleep_for(milliseconds(100));
   }
   std::cout << "Finished" << std::endl;
@@ -114,12 +117,12 @@ int showclock(bool repeat) {
   }
   while(true) {
     t1 = system_clock::to_time_t(system_clock::now());
-    std::cout << ctime(&t1);
+    std::cout << ctime(&t1)<<"\033[A\033[K";
     std::this_thread::sleep_for(seconds(1));
   }
 }
 std::string humanreadabletime(double seconds){
-  if ( seconds < 60 ) return std::to_string(seconds); 
+  if ( seconds < 60 ) return std::to_string(seconds).std::string::append(""); 
   const int sec = (int) seconds;   
   std::string time = "";
   //same algorighm for sec --> min, min --> hour 
