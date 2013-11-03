@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
       if (i+1 >= argc)
         return 1;
       std::string in(argv[i+1]);
-      if(in == ""){
+      if(in == "\0"){
         std::cout << "DIdn't put in an argument. Jokes on You!" << std::endl;        return 2; 
       }
       int colonc = 0;
