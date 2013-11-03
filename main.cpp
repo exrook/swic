@@ -17,8 +17,10 @@ int main(int argc, char **argv) {
         return showclock(true);
       return showclock();
     } else if (argv[i] ==( std::string("-t"))){
-      if (i+1 >= argc)
-        return 1;
+      if (i+1 >= argc){
+        std::cout << "No Input Given!" << std::endl; 
+        return 2;
+      }
       std::string in(argv[i+1]);
       int colonc = 0;
       short colonp[in.length()];
