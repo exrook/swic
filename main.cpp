@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
           colonp[colonc++] = j;
       }
       int times[colonc];
-    	try{
+      try{
 				times[0] = std::stoi(in.substr(0,colonp[0]));
       } 
       catch (std::exception e){
@@ -66,6 +66,12 @@ int main(int argc, char **argv) {
         }
       }
       if(sum > 343597438368) return 2; 
+      if(sum == 0){
+        std::cout<<"Little bastard, didn't put in a timer value, or put 0. "<< std::endl; 
+        std::cout<<"Thought you could get away with it, didn't you."<<std::endl;
+        std::cout<<"Well we found out. Now we are coming for you. With katanas. " <<std::endl; 
+        return 2;
+      }  
       return timer(seconds(sum));
     } else /*if (argv[i] == std::string("-h"))*/ {
       std::cout << "Usage:" << std::endl;
