@@ -73,6 +73,7 @@ int main(int argc, char **argv) {
         std::cout<<"Little bastard, didn't put in a timer value, or put 0. "<< std::endl; 
         std::cout<<"Thought you could get away with it, didn't you."<<std::endl;
         std::cout<<"Well we found out. Now we are coming for you. With katanas. " <<std::endl; 
+        std::cout<<"Our agent will be with you shortly" << std::endl; 
         return 2;
       }  
       return timer(seconds(sum));
