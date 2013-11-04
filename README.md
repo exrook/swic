@@ -22,10 +22,6 @@ Exit Codes:
 -----------
 `0`: Terminated successfully.
 
-`1`: An error occured during parsing -t
-
-`2`: The value of the input time is equal to zero, over 343,597,438,368, or not passed at all.
-
 Authors
 -------
 Written by Raj Shrimali and Jacob Hughes
