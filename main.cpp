@@ -80,31 +80,29 @@ int main(int argc, char **argv) {
   }
   return stopwatch();
 }
-
 int stopwatch() {
   auto t1 = high_resolution_clock::now();
   std::cout << "Time. Use Control-C (Command-C Mac Users) to exit. " <<std::endl;
-
   while(1 ){
   auto t2 = high_resolution_clock::now();
   std::cout << humanreadabletime((duration_cast<duration<double>>(t2-t1)).count())<< std::endl<<"\033[A\033[K";
   std::this_thread::sleep_for(milliseconds(100));
   }
-
   return 0;
 }
-
 int timer(seconds count) {
   auto t1 = high_resolution_clock::now();
   auto t2 = t1+count;
   while ( t2 > high_resolution_clock::now()) {
-    std::cout << "Seconds Left:" <<std::endl<<duration_cast<duration<double>>(count-(high_resolution_clock::now()-t1)).count() << std::endl << "\033[2A\033[K";
+    std::cout << "Seconds Left:" <<
+    std::endl <<
+    duration_cast<duration<double>>(count-(high_resolution_clock::now()-t1)).count() << 
+    std::endl << "\033[2A\033[K";
     std::this_thread::sleep_for(milliseconds(100));
   }
   std::cout << "Finished" << std::endl;
   return 0;
 }
-
 int showclock(bool repeat) {
   auto t1 = system_clock::to_time_t(system_clock::now());
   if (!repeat) {
@@ -169,3 +167,4 @@ std::string humanreadabletime(double seconds){
   time.std::string::append(raw_ms);
   return time;    
 }
+
