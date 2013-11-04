@@ -2,32 +2,39 @@ swic
 ====
 StopWatch Including Clock (and a timer)
 
-Synopsis:  
-        swic [OPTION]
 
-Description:
-	By default, swic acts as a stopwatch, and returns the time elapsed on any key input.
-        
-        [OPTIONS] are:
-        
-    	-h
-        	Display help
-        -t ```[[[[[YEARS:]WEEKS:]DAYS:]HOURS:]MINUTES:]<SECONDS>```
-        	Specify the duration for the timer. Exits on completion.
-        -c <loop>
-		        Display the current time, optionally in a loop. Loop can be anything. 
-	        	As of this version, it CAN NOT be used to continously display the stopwatch or timer values.
 
-Exit Status:
-	0 if OK
-	1 if error occured during parsing -t
-	2 if value of input is wayy too high. 
-AUTHOR
-	Written by Raj Shrimali and Jacob Hughes
+Usage
+-----
+By default, swic acts as a stopwatch.
+	
+The available parameters are listed here:
 
-REPORTING BUGS
-	Report a bug to rajshrimali@gmail.com or jhughes@distanthills.org
+```
+-h                 Display help
+-t [[[[[YEARS:]WEEKS:]DAYS:]HOURS:]MINUTES:]<SECONDS>
+                   Specify the duration for the timer. Exits on completion.
+-c <loop>          Display the current time, optionally in a loop. Loop can be anything. As of this version,
+                   it CAN NOT be used to continously display the stopwatch or timer values.
+```
 
-COPYRIGHT
-	This software is licensed under a GPLv3 lisence.
-	This is free software; you are free to change and redistribute it.
+Exit Codes:
+-----------
+`0`: Terminated successfully.
+
+`1`: An error occured during parsing -t
+
+`2`: The value of the input time is equal to zero, over 343,597,438,368, or not passed at all.
+
+Authors
+-------
+Written by Raj Shrimali and Jacob Hughes
+
+Reporting Bugs
+--------------
+Report bugs on the "[Issues](https://github.com/exrook/swic/issues)" tab on GitHub.
+
+Copyright
+---------
+This software is licensed under a GPLv3 lisence.
+This is free software; you are free to change and redistribute it.
