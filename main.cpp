@@ -8,8 +8,13 @@ using namespace std::chrono;
 int timer(seconds); 
 int stopwatch();
 int showclock(bool repeat=false);
+int help(std::string mesg="");
 std::string humanreadabletime(double); 
+
+std::string name("");
+
 int main(int argc, char **argv) {
+  name = argv[0];
   //parse options
   for(int i=1; i<argc; i++) {
     if (argv[i] == (std::string("-c"))) {
@@ -18,7 +23,7 @@ int main(int argc, char **argv) {
       return showclock();
     } else if (argv[i] ==( std::string("-t"))){
       if (i+1 >= argc)
-        return 1;
+        return help("Invalid Options");
       std::string in(argv[i+1]);
       int colonc = 0;
       short colonp[in.length()];
@@ -31,18 +36,14 @@ int main(int argc, char **argv) {
 				times[0] = std::stoi(in.substr(0,colonp[0]));
       } 
       catch (std::exception e){
-				std::cout << "Error occured while parsing arguemnt for -t" << std::endl; 
-				std::cout << "Are you sure you input a correct time value? " << std::endl;
-				return 1; 
+				return help("Invalid time input"); 
 			}  
 			for(int j=0; j < colonc; j++) {
 				try{
         	times[j+1] = std::stoi(in.substr(colonp[j]+1, colonp[j+1]-colonp[j]-1));
       	} 
 				catch(std::exception e){
-				std::cout << "Error occured while parsing arguemnt for -t" << std::endl; 
-				std::cout << "Are you sure you input a correct time value? " << std::endl;
-			return 1; 
+    			return help("Invalid time input");
 				}
 			}
       unsigned long sum = times[colonc];
@@ -65,14 +66,9 @@ int main(int argc, char **argv) {
             break;
         }
       }
-      if(sum > 343597438368) return 2; 
       return timer(seconds(sum));
     } else /*if (argv[i] == std::string("-h"))*/ {
-      std::cout << "Usage:" << std::endl;
-      std::cout << argv[0] << "           - act as a stopwatch, stoping when input is recieved" << std::endl;
-      std::cout << argv[0] << " -c <loop> - displays the current date and time, optionally in a loop" << std::endl ;
-      std::cout << argv[0] << " -t [[[[[years:]weeks:]days:]hours:]minutes:]<seconds> - wait for specified duration, then exit" << std::endl;
-      return 0;
+      return help();
     }
   }
   return stopwatch();
@@ -107,6 +103,15 @@ int showclock(bool repeat) {
     std::cout << ctime(&t1);
     std::this_thread::sleep_for(seconds(1));
   }
+}
+int help(std::string mesg) {
+  if (mesg.length() > 1)
+    std::cout << "ERROR: " << mesg << std::endl;
+  std::cout << "Usage:" << std::endl;
+  std::cout << name << "           - act as a stopwatch, stoping when input is recieved" << std::endl;
+  std::cout << name << " -c <loop> - displays the current date and time, optionally in a loop" << std::endl ;
+  std::cout << name << " -t [[[[[years:]weeks:]days:]hours:]minutes:]<seconds> - wait for specified duration, then exit" << std::endl;
+  return 1;
 }
 std::string humanreadabletime(double seconds){
   if ( seconds < 60 ) return std::to_string(seconds); 
