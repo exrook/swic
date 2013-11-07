@@ -20,7 +20,7 @@ The available parameters are listed here:
 
 Exit Codes:
 -----------
-`0`: Terminated successfully.
+`0`: Terminated successfully.   
 `1`: Some Error Occured. See the output (to STDOUT). 
 
 Authors
