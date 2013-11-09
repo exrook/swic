@@ -6,7 +6,7 @@ StopWatch Including Clock (and a timer)
 
 Usage
 -----
-By default, swic acts as a stopwatch.
+By default, swic acts as a stopwatch. It can be activated by simply typing `swic`. The stopwatch can be killed by the kill signal (default in most systems is ^C). 
 	
 The available parameters are listed here:
 
