@@ -18,18 +18,9 @@ The available parameters are listed here:
                    it CAN NOT be used to continously display the stopwatch or timer values.
 ```
 
-Exit Codes:
------------
-`0`: Terminated successfully.   
-`1`: Some Error Occured. See the output (to STDOUT). 
-
 Authors
 -------
 Written by Raj Shrimali and Jacob Hughes, with help from Matthew Dean 
-
-Reporting Bugs
---------------
-Report bugs on the "[Issues](https://github.com/exrook/swic/issues)" tab on GitHub.
 
 Copyright
 ---------
