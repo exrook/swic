@@ -3,6 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <exception>
+#include <cstdio>
 using namespace std::chrono;
 
 int timer(seconds); 
@@ -82,7 +83,7 @@ int main(int argc, char **argv) {
 }
 int stopwatch() {
   auto t1 = high_resolution_clock::now();
-  std::cout << "Time. Use Control-C (Command-C Mac Users) to exit. " <<std::endl;
+  std::cout << "Time. Use Control-C to exit" <<std::endl;
   while(1 ){
   auto t2 = high_resolution_clock::now();
   std::cout << humanreadabletime((duration_cast<duration<double>>(t2-t1)).count())<< std::endl<<"\033[A\033[K";
